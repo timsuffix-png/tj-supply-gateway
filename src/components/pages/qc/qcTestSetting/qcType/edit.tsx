@@ -1,0 +1,122 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import SideBar from "../../../../sidebar";
+import Breadcrumb from "../../../../breadcrumb";
+import Footer from "../../../../footer";
+import SubmitButton from "../../../../submitButton";
+import Swal from "sweetalert2";
+import BackButton from "../../../../backButton";
+import { useAuth } from "../../../../auth/authProvider";
+
+export default function EditQcType() {
+  const auth = useAuth()
+  const param = localStorage.getItem("param")
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    refreshData();
+  }, [auth]);
+
+  const fetchQcTypeData = async () => {
+    const data = await window.electronAPI.fetch({
+      method: "GET",
+      URL: `qc/type/${param}`
+    })
+    if (!data) {
+      throw new Error("Failed to fetch data");
+    }
+    return data
+  };
+
+  const refreshData = async () => {
+    const qcTypeData = await fetchQcTypeData();
+    setName(qcTypeData.data.name);
+  };
+
+  const editQcType = async () => {
+    if (name) {
+      const data = await window.electronAPI.fetch({
+        method: "PATCH",
+        URL: `qc/type/${param}`,
+        body: {
+          name: name
+        }
+      })
+      if (!data) {
+        Swal.fire({
+          icon: "error",
+          title: "ตรวจสอบข้อมูลใหม่อีกครั้ง",
+          text: "ชื่อประเภทการทดสอบอาจจะซ้ำกับของที่มีอยู่",
+        });
+      } else {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "บันทึกข้อมูลเรียบร้อย",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "กรอกข้อมูลไม่ครบ",
+        text: "กรุณากรอกข้อมูลให้ครบตามช่องที่มี * สีแดง",
+      });
+    }
+  };
+
+  return (
+    <>
+      <div className="flex w-screen h-screen scroll-smooth">
+        <SideBar />
+        <div className="flex flex-col w-full h-full">
+          <Breadcrumb />
+          <div className="flex flex-col bg-white w-full h-full overflow-y-auto whitespace-nowrap place-qcs-center pt-[60px]">
+            <div className="flex flex-row w-full place-qcs-center">
+              <div tabIndex={0} onClick={() => {
+                  localStorage.setItem("currentUrl", "qc/testSetting/create/qcType");
+                  window.location.reload();
+                }} className="ml-20 cursor-pointer">
+                <BackButton text="ย้อนกลับ" />
+              </div>
+              <h2 className="ml-20 text-black text-2xl font-bold font-['Sarabun']">
+                แก้ไขประเภทการทดสอบ
+              </h2>
+            </div>
+            <div className="flex flex-col w-full mt-10">
+              <div className="flex flex-row w-full place-qcs-center">
+                <h2 className="ml-40 text-black text-xl font-normal font-['Sarabun']">
+                  แก้ไขชื่อประเภทการทดสอบ
+                </h2>
+              </div>
+              <div className="flex place-qcs-center place-content-center mt-10">
+                <label className="mx-20 w-1/2 flex flex-col">
+                  <h4 className="text-xl text-black font-normal font-['Sarabun']">
+                    ชื่อประเภทการทดสอบ
+                    <span className="text-red-600">&nbsp;*</span>
+                  </h4>
+                  <input
+                    type="text"
+                    className="h-[50px] border border-black px-3 text-black text-2xl font-normal font-['Sarabun'] rounded-md"
+                    defaultValue={name}
+                    placeholder="ชื่อประเภทการทดสอบ"
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </label>
+                <SubmitButton text="บันทึก" onClick={editQcType} />
+              </div>
+            </div>
+            <div className="flex flex-col-reverse place-content-center">
+              <Footer />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

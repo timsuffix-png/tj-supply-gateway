@@ -90,3 +90,6 @@ typings/
 
 # Electron-Forge
 out/
+
+config.cnf
+payload.scp

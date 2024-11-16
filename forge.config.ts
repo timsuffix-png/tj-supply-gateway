@@ -14,7 +14,14 @@ import { rendererConfig } from './webpack.renderer.config';
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
-    icon: "./public/favicon.ico"
+    icon: "./public/favicon.ico",
+    extraResource: [
+      "./public/irons.png",
+      "./public/logo.png",
+      "./public/loading.gif",
+      "./src/asset/FAKEssscmdproto.exe",
+      "./src/asset/ssscmdproto.exe"
+    ]
   },
   rebuildConfig: {},
   makers: [
@@ -43,6 +50,7 @@ const config: ForgeConfig = {
           },
         ],
       },
+      port: 8888
     }),
     // Fuses are used to enable/disable various Electron functionality
     // at package time, before code signing the application

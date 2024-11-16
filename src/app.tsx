@@ -1,10 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import Index from "./components/pages";
 
 const root = createRoot(document.body);
-root.render(
-  <div>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
-  </div>
-);
+root.render(<Index />);
