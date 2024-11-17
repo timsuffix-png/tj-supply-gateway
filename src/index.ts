@@ -297,58 +297,79 @@ app.on("ready", async () => {
           newConfig += data + "\n";
         }
       }
-      writeFileSync("config.cnf", newConfig.substring(0, newConfig.length-1))
+      writeFileSync("config.cnf", newConfig.substring(0, newConfig.length - 1));
     } catch {
       // file not found error
       writeFileSync("config.cnf", "API=http://localhost:3021/api/v1/");
     }
   });
 
-  ipcMain.handle("sssTest", async (event, args: {script: string, COM: string}) => {
-    writeFileSync("payload.scp", args.script)
+  ipcMain.handle(
+    "sssTest",
+    async (event, args: { script: string; COM: string }) => {
+      writeFileSync("payload.scp", args.script);
 
-    if (
-      existsSync(path.join(process.cwd(), "resources", "ssscmdproto.exe"))
-    ) {
-      const result = await execAsync(
-        `cmd /c ${path.join(process.cwd(), "resources", "ssscmdproto.exe")} -${args.COM} ./payload.scp`
-      );
-      return result.stdout;
-    } else {
-      const result = await execAsync(
-        `cmd /c ${path.join(
-          process.cwd(),
-          "src",
-          "asset",
-          "ssscmdproto.exe"
-        )} -${args.COM} ./payload.scp`
-      );
-      return result.stdout;
+      if (
+        existsSync(path.join(process.cwd(), "resources", "ssscmdproto.exe"))
+      ) {
+        const result = await execAsync(
+          `cmd /c ${path.join(
+            process.cwd(),
+            "resources",
+            "ssscmdproto.exe"
+          )} -${args.COM} ./payload.scp`
+        );
+        return result.stdout;
+      } else {
+        const result = await execAsync(
+          `cmd /c ${path.join(
+            process.cwd(),
+            "src",
+            "asset",
+            "ssscmdproto.exe"
+          )} -${args.COM} ./payload.scp`
+        );
+        return result.stdout;
+      }
     }
-  })
+  );
 
-  ipcMain.handle("fakeSssTest", async (event, args: {script: string, COM: string}) => {
-    writeFileSync("payload.scp", args.script)
+  ipcMain.handle(
+    "fakeSssTest",
+    async (event, args: { script: string; COM: string }) => {
+      writeFileSync("payload.scp", args.script);
+      const type = args.script.includes("HIPOT")
+        ? "HIPOT"
+        : args.script.includes("EBOND")
+        ? "EBOND"
+        : args.script.includes("DCIR")
+        ? "DCIR"
+        : "PWRLK";
 
-    if (
-      existsSync(path.join(process.cwd(), "resources", "FAKEssscmdproto.exe"))
-    ) {
-      const result = await execAsync(
-        `cmd /c ${path.join(process.cwd(), "resources", "FAKEssscmdproto.exe")}`
-      );
-      return result.stdout;
-    } else {
-      const result = await execAsync(
-        `cmd /c ${path.join(
-          process.cwd(),
-          "src",
-          "asset",
-          "FAKEssscmdproto.exe"
-        )}`
-      );
-      return result.stdout;
+      if (
+        existsSync(path.join(process.cwd(), "resources", "FAKEssscmdproto.exe"))
+      ) {
+        const result = await execAsync(
+          `cmd /c ${path.join(
+            process.cwd(),
+            "resources",
+            "FAKEssscmdproto.exe"
+          )} ${type}`
+        );
+        return result.stdout;
+      } else {
+        const result = await execAsync(
+          `cmd /c ${path.join(
+            process.cwd(),
+            "src",
+            "asset",
+            "FAKEssscmdproto.exe"
+          )} ${type}`
+        );
+        return result.stdout;
+      }
     }
-  });
+  );
 
   createWindow();
 });
