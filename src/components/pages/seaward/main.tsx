@@ -181,7 +181,7 @@ export default function Seaward() {
           detail:
             newQcMains.data[i].qcMain.status === "Passed"
               ? ""
-              : splitResultArray.split(":")[3].trim(),
+              : splitResultArray[0].split(":")[3].trim(),
         },
       });
     }
