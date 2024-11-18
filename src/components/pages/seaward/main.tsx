@@ -376,9 +376,6 @@ export default function Seaward() {
                 </div>
               </div>
               <div className="flex place-content-end place-items-center w-full pr-20 pt-20">
-                {/* <div className="mr-10">
-                  <SubmitButton text="บันทึก" />
-                </div> */}
                 <div>
                   {(qcProject || isSelectedCard) && serialNumber && (
                     <SubmitButton
