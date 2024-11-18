@@ -12,6 +12,7 @@ import { Translator } from "../../translator";
 import SubmitButton from "../../submitButton";
 import Swal from "sweetalert2";
 import Testing from "./testing";
+import TestHistory from "./testHistory";
 
 export default function Seaward() {
   const auth = useAuth();
@@ -87,18 +88,24 @@ export default function Seaward() {
   };
   const [testing, setTesting] = useState(false);
   const revealValue = useRef([]);
-  let key = 0;
+  let elementKey1 = 0;
+  let elementKey2 = 0;
+  const [isSelectedCard, setIsSelectedCard] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, [auth, qcProject]);
+
+  useEffect(() => {
+    setQcProject(null);
+  }, [isSelectedCard]);
 
   const fetchData = async () => {
     const qcProjectData = await window.electronAPI.fetch({
       method: "GET",
       URL: `qc/project?limit=999999999999&page=1`,
     });
-    if (qcProject.length > 0) {
+    if (qcProject?.length > 0 && !isSelectedCard) {
       const qcMainDatas = await window.electronAPI.fetch({
         method: "GET",
         URL: `qc/itemProject/${qcProject}`,
@@ -133,15 +140,21 @@ export default function Seaward() {
       newQcMains.data[i].qcMain.allResult = null;
     }
     setQcMains(newQcMains);
-    const record = await window.electronAPI.fetch({
-      method: "POST",
-      URL: "qc/record",
-      body: {
-        qcProjectID: qcProject,
-        serialNumber: serialNumber,
-        testBy: auth.user.data.ID,
-      },
-    });
+    let record: any;
+    if (!isSelectedCard) {
+      record = await window.electronAPI.fetch({
+        method: "POST",
+        URL: "qc/record",
+        body: {
+          qcProjectID: qcProject,
+          serialNumber: serialNumber,
+          testBy: auth.user.data.ID,
+        },
+      });
+    } else {
+      record = qcMains;
+    }
+
     // setTesting(true);
     for (let i in qcMains.data) {
       let script = "SSSCMD_HAL_PERFORM_TEST(";
@@ -151,7 +164,7 @@ export default function Seaward() {
         script += value + ", ";
       }
       script = script.substring(0, script.length - 2) + ")\n";
-      const result = await window.electronAPI.sssTest({
+      const result = await window.electronAPI.fakeSssTest({
         script: script,
         COM: currentCOMPort,
       });
@@ -214,16 +227,22 @@ export default function Seaward() {
                     โปรเจ็คการทดสอบ
                     <span className="text-red-600">&nbsp;*</span>
                   </h4>
-                  <Select
-                    className="rounded-md border border-black text-black text-xl font-normal font-['Sarabun']"
-                    name="formulaProject"
-                    closeMenuOnSelect={true}
-                    options={qcProjects?.data?.map((data) => ({
-                      value: data.ID,
-                      label: data.projectName,
-                    }))}
-                    onChange={(e) => setQcProject(e.value)}
-                  />
+                  {!isSelectedCard ? (
+                    <Select
+                      className="rounded-md border border-black text-black text-xl font-normal font-['Sarabun']"
+                      name="formulaProject"
+                      closeMenuOnSelect={true}
+                      options={qcProjects?.data?.map((data) => ({
+                        value: data.ID,
+                        label: data.projectName,
+                      }))}
+                      onChange={(e) => setQcProject(e.value)}
+                    />
+                  ) : (
+                    <h1 className="text-red-600 text-xl h-10 flex place-items-end">
+                      มีการทดสอบที่ถูกเลือกแล้ว
+                    </h1>
+                  )}
                 </label>
               </div>
               <div className="w-9/12 mx-10">
@@ -242,8 +261,13 @@ export default function Seaward() {
                 </label>
               </div>
             </div>
+            <TestHistory
+              serialNumber={serialNumber}
+              setData={setQcMains}
+              isChecked={setIsSelectedCard}
+            />
             <div className="flex flex-col w-full mt-10">
-              <div className="flex flex-row w-full place-items-center mt-10">
+              <div className="flex flex-row w-full place-items-center">
                 <h2 className="ml-40 text-black text-xl font-normal font-['Sarabun']">
                   รายการการทดสอบ
                 </h2>
@@ -271,7 +295,7 @@ export default function Seaward() {
                       {qcMains?.data?.map((data, index) => {
                         if (data.qcMain.qcType.name.toLowerCase() == "seaward")
                           return (
-                            <div key={data.ID}>
+                            <div key={elementKey1++}>
                               <div className="flex flex-row w-full h-12 hover:bg-gray-200">
                                 <div className="w-3/12 text-start text-lg font-['Sarabun'] flex place-items-center">
                                   {Translator.qc.icon}
@@ -336,7 +360,7 @@ export default function Seaward() {
                                     .map((data: string) => {
                                       return (
                                         <h1
-                                          key={key++}
+                                          key={elementKey2++}
                                           className="text-black text-base"
                                         >
                                           {data}
@@ -356,11 +380,13 @@ export default function Seaward() {
                   <SubmitButton text="บันทึก" />
                 </div> */}
                 <div>
-                  <SubmitButton
-                    text="ทดสอบ"
-                    className="bg-red-600"
-                    onClick={seawardTest}
-                  />
+                  {(qcProject || isSelectedCard) && serialNumber && (
+                    <SubmitButton
+                      text="ทดสอบ"
+                      className="bg-red-600"
+                      onClick={seawardTest}
+                    />
+                  )}
                 </div>
               </div>
             </div>
