@@ -196,6 +196,7 @@ export default function Seaward() {
         },
       });
     }
+    setSerialNumber(null)
     setTesting(false);
   };
 
@@ -261,11 +262,11 @@ export default function Seaward() {
                 </label>
               </div>
             </div>
-            <TestHistory
+            {serialNumber && <TestHistory
               serialNumber={serialNumber}
               setData={setQcMains}
               isChecked={setIsSelectedCard}
-            />
+            />}
             <div className="flex flex-col w-full mt-10">
               <div className="flex flex-row w-full place-items-center">
                 <h2 className="ml-40 text-black text-xl font-normal font-['Sarabun']">
