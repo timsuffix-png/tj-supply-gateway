@@ -196,7 +196,7 @@ export default function Seaward() {
         },
       });
     }
-    setSerialNumber(null)
+    setSerialNumber(null);
     setTesting(false);
   };
 
@@ -256,17 +256,23 @@ export default function Seaward() {
                     className="h-[40px] w-full border border-black mt-1 px-3 text-xl font-normal font-['Sarabun'] rounded-md"
                     type="text"
                     placeholder="รหัสสินค้า"
+                    onClick={(e: any) => {
+                      e.target.value = "";
+                      setSerialNumber("");
+                    }}
                     onChange={(e) => setSerialNumber(e.target.value)}
                     required
                   />
                 </label>
               </div>
             </div>
-            {serialNumber && <TestHistory
-              serialNumber={serialNumber}
-              setData={setQcMains}
-              isChecked={setIsSelectedCard}
-            />}
+            {serialNumber && (
+              <TestHistory
+                serialNumber={serialNumber}
+                setData={setQcMains}
+                isChecked={setIsSelectedCard}
+              />
+            )}
             <div className="flex flex-col w-full mt-10">
               <div className="flex flex-row w-full place-items-center">
                 <h2 className="ml-40 text-black text-xl font-normal font-['Sarabun']">
