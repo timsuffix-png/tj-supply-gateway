@@ -155,7 +155,7 @@ export default function Seaward() {
       record = qcMains;
     }
 
-    // setTesting(true);
+    setTesting(true);
     for (let i in qcMains.data) {
       let script = "SSSCMD_HAL_PERFORM_TEST(";
       if (qcMains.data[i].qcMain.qcType.name.toLowerCase() != "seaward")
@@ -196,7 +196,7 @@ export default function Seaward() {
         },
       });
     }
-    // setTesting(false);
+    setTesting(false);
   };
 
   return (
