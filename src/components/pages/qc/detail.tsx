@@ -18,8 +18,11 @@ export default function QcDetail() {
 
   const fetchData = async () => {
     const data = await window.electronAPI.fetch({
-      method: "GET",
-      URL: `qc/record/${param}`,
+      method: "POST",
+      URL: `qc/record/findBySerialNumber`,
+      body: {
+        serialNumber: param
+      }
     });
     if (!data) throw new Error("Failed to fetch data.");
 
