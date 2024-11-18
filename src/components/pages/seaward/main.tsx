@@ -151,6 +151,11 @@ export default function Seaward() {
           testBy: auth.user.data.ID,
         },
       });
+      if (!record)
+        return Swal.fire({
+          icon: "error",
+          title: "รหัสสินค้าผิด",
+        });
     } else {
       record = qcMains;
     }
@@ -164,7 +169,7 @@ export default function Seaward() {
         script += value + ", ";
       }
       script = script.substring(0, script.length - 2) + ")\n";
-      const result = await window.electronAPI.sssTest({
+      const result = await window.electronAPI.fakeSssTest({
         script: script,
         COM: currentCOMPort,
       });
