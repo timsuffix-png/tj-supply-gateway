@@ -11,7 +11,7 @@ export default function SerialCommunicationPort() {
     const fetchData = async () => {
       window.electronAPI.portlist(setPortList);
       serialPortList();
-      setCOMPort(Number(await window.electronAPI.getCOMPort()));
+      setCOMPort(Number(await window.electronAPI.getSeawardCOMPort()));
     };
     fetchData();
   }, []);
@@ -51,7 +51,7 @@ export default function SerialCommunicationPort() {
                 title: "ตรวจสอบข้อมูลใหม่อีกครั้ง",
                 text: "กรุณาเลือกพอร์ตก่อนบันทึก",
               });
-            await window.electronAPI.setCOMPort(COMPort);
+            await window.electronAPI.setSeawardCOMPort(COMPort);
             setCOMPort(await window.electronAPI.getAPIPath());
             return Swal.fire({
               position: "top-end",

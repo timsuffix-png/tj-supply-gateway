@@ -267,12 +267,12 @@ app.on("ready", async () => {
     }
   });
 
-  ipcMain.handle("getCOMPort", async (event, args) => {
+  ipcMain.handle("getSeawardCOMPort", async (event, args) => {
     var COM: string | null;
     try {
       const config = readFileSync("config.cnf").toString("utf-8");
       for (let data of config.split("\n")) {
-        if (data.includes("COM")) {
+        if (data.includes("SeawardCOM")) {
           COM = data.split("=")[1].trim().replaceAll('"', "");
           break;
         }
@@ -285,14 +285,14 @@ app.on("ready", async () => {
     return COM;
   });
 
-  ipcMain.on("setCOMPort", async (event, port) => {
+  ipcMain.on("setSeawardCOMPort", async (event, port) => {
     let newConfig = "";
     try {
       const config = readFileSync("config.cnf").toString("utf-8");
-      if (!config.includes("COM")) newConfig += `COM=${port}\n`;
+      if (!config.includes("SeawardCOM")) newConfig += `SeawardCOM=${port}\n`;
       for (let data of config.split("\n")) {
-        if (data.includes("COM")) {
-          newConfig += `COM=${port}\n`;
+        if (data.includes("SeawardCOM")) {
+          newConfig += `SeawardCOM=${port}\n`;
         } else {
           newConfig += data + "\n";
         }

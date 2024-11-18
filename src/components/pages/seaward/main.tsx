@@ -84,7 +84,7 @@ export default function Seaward() {
   const openPopup = () => setPopup(true);
   const closePopup = async () => {
     setPopup(false);
-    setCurrentCOMPort(Number(await window.electronAPI.getCOMPort()));
+    setCurrentCOMPort(Number(await window.electronAPI.getSeawardCOMPort()));
   };
   const [testing, setTesting] = useState(false);
   const revealValue = useRef([]);
@@ -113,7 +113,7 @@ export default function Seaward() {
       setQcMains(qcMainDatas);
     }
     setQcProjects(qcProjectData);
-    setCurrentCOMPort(Number(await window.electronAPI.getCOMPort()));
+    setCurrentCOMPort(Number(await window.electronAPI.getSeawardCOMPort()));
   };
 
   const seawardTest = async () => {

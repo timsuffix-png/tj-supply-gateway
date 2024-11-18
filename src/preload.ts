@@ -11,8 +11,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
   getAPIPath: ()=>ipcRenderer.invoke("getAPIPath"),
   setAPIPath: (path: string)=>ipcRenderer.send("setAPIPath", path),
   portlist: (callback: (portList: any)=>void)=>ipcRenderer.on("portlist", (event, portList)=>callback(portList)),
-  getCOMPort: ()=>ipcRenderer.invoke("getCOMPort"),
-  setCOMPort: (port: number)=>ipcRenderer.send("setCOMPort", port),
+  getSeawardCOMPort: ()=>ipcRenderer.invoke("getSeawardCOMPort"),
+  setSeawardCOMPort: (port: number)=>ipcRenderer.send("setSeawardCOMPort", port),
   sssTest: (args: {script: string, COM: string})=>ipcRenderer.invoke("sssTest", args),
   fakeSssTest: (args: {script: string, COM: string})=>ipcRenderer.invoke("fakeSssTest", args),
 })
