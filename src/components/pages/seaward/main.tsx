@@ -15,7 +15,6 @@ import Testing from "./testing";
 
 export default function Seaward() {
   const auth = useAuth();
-  const [portList, setPortList] = useState<Electron.SerialPort[]>();
   const [currentCOMPort, setCurrentCOMPort] = useState<number | null>();
   const [qcProjects, setQcProjects] = useState<{
     error: boolean;
@@ -88,10 +87,9 @@ export default function Seaward() {
   };
   const [testing, setTesting] = useState(false);
   const revealValue = useRef([]);
-  let key = 0
+  let key = 0;
 
   useEffect(() => {
-    window.electronAPI.portlist(setPortList);
     fetchData();
   }, [auth, qcProject]);
 
@@ -128,13 +126,13 @@ export default function Seaward() {
         title: "กรุณาแสกน Qr-Code สินค้าก่อนการทดสอบ",
       });
     // clear before result
-    let newQcMains = {...qcMains}
-    for (let i in newQcMains.data){
-      newQcMains.data[i].qcMain.status = null
-      newQcMains.data[i].qcMain.result = null
-      newQcMains.data[i].qcMain.allResult = null
+    let newQcMains = { ...qcMains };
+    for (let i in newQcMains.data) {
+      newQcMains.data[i].qcMain.status = null;
+      newQcMains.data[i].qcMain.result = null;
+      newQcMains.data[i].qcMain.allResult = null;
     }
-    setQcMains(newQcMains)
+    setQcMains(newQcMains);
     const record = await window.electronAPI.fetch({
       method: "POST",
       URL: "qc/record",
@@ -337,7 +335,10 @@ export default function Seaward() {
                                     .split("\n")
                                     .map((data: string) => {
                                       return (
-                                        <h1 key={key++} className="text-black text-base">
+                                        <h1
+                                          key={key++}
+                                          className="text-black text-base"
+                                        >
                                           {data}
                                         </h1>
                                       );
