@@ -26,7 +26,7 @@ const config: ForgeConfig = {
   rebuildConfig: {},
   makers: [
     new MakerSquirrel({
-      iconUrl: "https://raw.githubusercontent.com/buraito-kun/Reactron/refs/heads/master/public/favicon.ico",
+      iconUrl: "https://raw.githubusercontent.com/buraito-kun/TJ-supply-gateway/refs/heads/master/public/favicon.ico?token=GHSAT0AAAAAACHK3B4OCGN5VLIOEGPMJWZQZZ56ZRA",
       setupIcon: "./public/favicon.ico"
     }), 
     new MakerZIP({}, ['darwin']), 
