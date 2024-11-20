@@ -1,8 +1,8 @@
 {
-  "name": "programgateway2",
-  "productName": "Programgateway2",
+  "name": "testjunction-tj",
+  "productName": "TestJunction-TJ",
   "version": "0.0.1",
-  "description": "My Electron application description",
+  "description": "A program that will connect to test machine then control the test machine.",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
@@ -45,7 +45,7 @@
   "keywords": [],
   "author": {
     "name": "Buraito kun",
-    "email": "akaruixrin19220@gmail.com"
+    "email": "off.brightthanadej@gmail.com"
   },
   "license": "MIT",
   "dependencies": {
