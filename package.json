@@ -1,7 +1,7 @@
 {
   "name": "testjunction-tj",
   "productName": "TestJunction-TJ",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A program that will connect to test machine then control the test machine.",
   "main": ".webpack/main",
   "scripts": {
