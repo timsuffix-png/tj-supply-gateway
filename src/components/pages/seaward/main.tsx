@@ -174,6 +174,14 @@ export default function Seaward() {
         COM: currentCOMPort,
       });
       while (!result) {}
+      if (result === "error"){
+        setTesting(false)
+        return Swal.fire({
+          icon: "error",
+          title: "พอร์ตที่ใช้ต่อเครื่อง Seaward ไม่ถูกต้อง",
+          text: "กรุณาเปลี่ยนพอร์ต"
+        });
+      }
       let resultArray = result.split("\n");
       let splitResultArray = resultArray[resultArray.length - 4].split(",");
 
