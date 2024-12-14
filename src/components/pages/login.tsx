@@ -78,10 +78,10 @@ export default function Login() {
           <div className="w-full h-[80%] flex flex-col place-items-center">
             <div className="w-full sm:w-3/4 2xl:w-1/2 h-auto flex flex-col place-items-center bg-white rounded-[15px] border-2 border-black pt-10">
               <h1 className="text-black text-[23px] lg:text-[27px] xl:text-[32px] font-extrabold font-['Sarabun']">
-                ยินดีต้อนรับสู่ระบบจัดการคลังสินค้า
+                ยินดีต้อนรับสู่โปรแกรมทดสอบ
               </h1>
               <h2 className="text-black text-base lg:text-lg xl:text-2xl font-bold font-['Sarabun'] mt-10">
-                ลงชื่อเข้าใช้บัญชีของคุณ
+                ลงชื่อเข้าใช้บัญชีผู้ทดสอบของคุณ
               </h2>
               <div className="w-full flex flex-col place-items-center mt-14">
                 <label className="w-3/4">
