@@ -111,28 +111,34 @@ export default function Main() {
   return (
     <>
       <div className="flex w-screen h-screen">
-        <SideBar />
+        <div>
+          <SideBar />
+        </div>
         <div className="flex flex-col w-full h-full">
           <Breadcrumb />
           <div className="flex flex-col bg-white w-full h-full overflow-y-auto whitespace-nowrap place-items-center pt-5">
-            <div className="flex flex-row w-full place-items-center place-content-between px-20">
-              <h2 className="text-black text-2xl font-bold font-['Sarabun']">
+            <div className="flex flex-col sm:flex-row w-full sm:place-content-between sm:place-items-center">
+              <h2 className="ml-14 2xl:ml-20 text-black text-lg xl:text-xl 2xl:text-2xl font-bold font-['Sarabun']">
                 การตรวจสอบคุณภาพสินค้า
               </h2>
-              <div className="flex">
-                <div tabIndex={0} onClick={()=>{localStorage.setItem("currentUrl", "qc/testSetting");window.location.reload()}}>
+              <div className="mt-5 flex place-content-between sm:mt-0 sm:place-content-start">
+                <div 
+                  tabIndex={0} 
+                  onClick={()=>{localStorage.setItem("currentUrl", "qc/testSetting");window.location.reload()}}
+                  className="ml-10 sm:mr-3"
+                >
                   <SubmitButton text="ตั้งค่าการทดสอบ" />
                 </div>
                 <div
                   tabIndex={0}
                   onClick={()=>{localStorage.setItem("currentUrl", "qc/project");window.location.reload()}}
-                  className="ml-3"
+                  className="mr-10 sm:mr-20"
                 >
                   <SubmitButton text="โปรเจ็คการทดสอบ" />
                 </div>
               </div>
             </div>
-            <div className="w-full flex flex-col mt-10 pl-10 pr-20">
+            <div className="w-full flex flex-col mt-10 px-1 sm:pl-10 sm:pr-20">
               <div className="flex place-items-center place-content-between">
                 <h3 className="text-black font-normal font-['Sarabun'] ml-5">
                   ผลการตรวจสอบโดยรวม
@@ -140,7 +146,7 @@ export default function Main() {
               </div>
               <div className="w-full flex border border-black rounded-full bg-gray-200">
                 <div
-                  className="h-10 bg-[#13A452] rounded-l-full flex place-items-center place-content-center group"
+                  className="h-7 sm:h-10 bg-[#13A452] rounded-l-full flex place-items-center place-content-center group"
                   style={{ width: `${passPercent}%` }}
                 >
                   <div className="w-auto h-auto px-3 py-1 bg-[#13A452] rounded-full place-items-center place-content-center group-hover:flex group-hover:-translate-y-12 hidden font-['Sarabun']">
@@ -148,7 +154,7 @@ export default function Main() {
                   </div>
                 </div>
                 <div
-                  className="h-10 bg-[#ffea8f] flex place-items-center place-content-center group"
+                  className="h-7 sm:h-10 bg-[#ffea8f] flex place-items-center place-content-center group"
                   style={{ width: `${inProgressPercent}%` }}
                 >
                   <div className="w-auto h-auto px-3 py-1 bg-[#ffea8f] rounded-full place-items-center place-content-center group-hover:flex group-hover:-translate-y-12 hidden font-['Sarabun']">
@@ -156,7 +162,7 @@ export default function Main() {
                   </div>
                 </div>
                 <div
-                  className="h-10 bg-[#EE6C4D] rounded-r-full flex place-items-center place-content-center group"
+                  className="h-7 sm:h-10 bg-[#EE6C4D] rounded-r-full flex place-items-center place-content-center group"
                   style={{ width: `${failPercent}%` }}
                 >
                   <div className="w-auto h-auto px-3 py-1 bg-[#EE6C4D] rounded-full place-items-center place-content-center group-hover:flex group-hover:-translate-y-12 hidden font-['Sarabun']">
@@ -165,42 +171,44 @@ export default function Main() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row w-full place-items-center mt-10">
-              <h2 className="ml-40 text-black text-xl font-normal font-['Sarabun']">
+            <div className="flex flex-col lg:flex-row w-full lg:place-items-center mt-10">
+              <h2 className="ml-16 lg:ml-40 text-black text-lg xl:text-xl font-normal font-['Sarabun']">
                 ตารางผลการทดสอบ
               </h2>
-              <input
-                className="h-[50px] w-[700px] border border-black mt-1 ml-10 px-3 text-2xl font-normal font-['Sarabun'] rounded-md text-black"
-                type="number"
-                placeholder="ค้นหาจากรหัสสินค้า หรือวัตถุดิบ"
-                onChange={(e) => setLike(e.target.value)}
-              />
+              <div className="w-full flex place-items-center place-content-center lg:place-content-start">
+                <input
+                  className="h-[40px] md:h-[50px] w-[90%] xl:w-[700px] border border-black mt-1 lg:ml-10 px-3 text-xl xl:text-2xl font-normal font-['Sarabun'] rounded-md text-black"
+                  type="number"
+                  placeholder="ค้นหาจากรหัสสินค้า หรือวัตถุดิบ"
+                  onChange={(e) => setLike(e.target.value)}
+                />
+              </div>
             </div>
             <div className="flex flex-col w-full">
-              <div className="ml-10 mr-20 mt-10 flex flex-col place-content-center border border-[#cecece] rounded-xl">
+              <div className="sm:ml-10 sm:mr-20 mt-10 flex flex-col place-content-center border border-[#cecece] rounded-xl">
                 <div className="flex place-content-center">
                   <div className="w-[95%] my-[20px]">
                     <div className="text-black font-bold">
                       <div className="bg-[#6494d3] rounded-t-3xl flex flex-row h-10 place-items-center">
-                        <div className="w-2/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-8/12 sm:w-5/12 md:w-4/12 lg:w-3/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           รหัสสินค้า
                         </div>
-                        <div className="w-2/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-2/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           โปรเจ็คการทดสอบ
                         </div>
-                        <div className="w-3/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="hidden lg:block w-2/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ชื่อล็อตการผลิต
                         </div>
-                        <div className="w-2/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="hidden sm:block w-2/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ชื่อผู้ทดสอบ
                         </div>
-                        <div className="w-1/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-1/12 sm:w-2/12 lg:w-1/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           สถานะ
                         </div>
-                        <div className="w-1/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="hidden md:block w-2/12 lg:w-1/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           เวลา
                         </div>
-                        <div className="w-1/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-1/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ข้อมูล
                         </div>
                       </div>
@@ -212,41 +220,47 @@ export default function Main() {
                             key={data.ID}
                             className="flex flex-row w-full h-12 hover:bg-gray-200"
                           >
-                            <div className="w-2/12 text-start text-lg font-['Sarabun'] flex place-items-center">
-                              {Translator.item.icon}
-                              <h5 className="ml-1">{data.construct.ID}</h5>
+                            <div className="w-8/12 sm:w-5/12 md:w-4/12 lg:w-3/12 text-start text-base lg:text-lg font-['Sarabun'] flex place-items-center">
+                              <div className="hidden xl:block">{Translator.item.icon}</div>
+                              <h5 className="xl:ml-1 text-ellipsis overflow-hidden">{data.construct.ID}</h5>
                             </div>
-                            <div className="w-2/12 text-center text-lg font-['Sarabun'] flex place-content-center place-items-center overflow-hidden">
-                              {data.qcProject.projectName}
+                            <div className="w-2/12 text-center text-base lg:text-lg font-['Sarabun'] flex place-content-center place-items-center">
+                              <div className="text-ellipsis overflow-hidden">
+                                {data.qcProject.projectName}
+                              </div>
                             </div>
-                            <div className="w-3/12 text-center text-lg font-['Sarabun'] flex place-content-start place-items-center overflow-hidden">
-                              {data.construct.productionSub.productionLot.name}
+                            <div className="hidden lg:flex w-2/12 text-center text-base lg:text-lg font-['Sarabun'] place-content-start place-items-center">
+                              <div className="text-ellipsis overflow-hidden">
+                                {data.construct.productionSub.productionLot.name}
+                              </div>
                             </div>
-                            <div className="w-2/12 text-start text-lg font-['Sarabun'] flex place-items-center">
-                              {Translator.user.icon}
-                              <h5 className="ml-1">
-                                {data.testBy.name + " " + data.testBy.surname}
-                              </h5>
+                            <div className="hidden sm:flex w-2/12 text-start text-base lg:text-lg font-['Sarabun'] place-items-center">
+                              <div className="hidden xl:block">
+                                {Translator.user.icon}
+                              </div>
+                              <h5 className="xl:ml-1 text-ellipsis overflow-hidden">{data.testBy.name + " " + data.testBy.surname}</h5>
                             </div>
-                            <div className="w-1/12 text-center text-lg font-['Sarabun'] flex place-content-center place-items-center">
+                            <div className="w-1/12 sm:w-2/12 lg:w-1/12 text-center text-base lg:text-lg font-['Sarabun'] flex place-content-center place-items-center">
                               {data.statusOverView === "Passed" ? (
-                                <h3 className="text-[#13A452] bg-[#adff9d] w-10 text-sm rounded-xl">
+                                <h3 className="text-[#13A452] bg-[#adff9d] px-2 text-sm rounded-xl text-ellipsis overflow-hidden">
                                   ผ่าน
                                 </h3>
                               ) : data.statusOverView === "Failed" ? (
-                                <h3 className="text-[#ff0000] bg-[#ffa6a6] w-14 text-sm rounded-xl">
+                                <h3 className="text-[#ff0000] bg-[#ffa6a6] px-2 text-sm rounded-xl text-ellipsis overflow-hidden">
                                   ไม่ผ่าน
                                 </h3>
                               ) : data.statusOverView === "In progress" ? (
-                                <h3 className="text-[#ff6600] bg-[#ffea8f] w-24 text-sm rounded-xl">
+                                <h3 className="text-[#ff6600] bg-[#ffea8f] px-2 text-sm rounded-xl text-ellipsis overflow-hidden">
                                   รอการตรวจสอบ
                                 </h3>
                               ) : null}
                             </div>
-                            <div className="w-1/12 text-center text-lg font-['Sarabun'] flex place-content-center place-items-center">
-                              {data.createdAt.split("T")[0]}
+                            <div className="hidden md:block w-2/12 lg:w-1/12 text-center text-base lg:text-lg font-['Sarabun'] place-content-center place-items-center">
+                              <div className="text-ellipsis overflow-hidden">
+                                {data.createdAt.split("T")[0]}
+                              </div>
                             </div>
-                            <div className="w-1/12 text-center text-lg font-['Sarabun'] flex place-content-center place-items-center">
+                            <div className="w-1/12 text-center text-base lg:text-lg font-['Sarabun'] flex place-content-center place-items-center">
                               <button
                                 onClick={
                                   () => {
@@ -277,7 +291,7 @@ export default function Main() {
                   </div>
                 </div>
               </div>
-              <div className="flex place-content-center ml-10 mr-20">
+              <div className="flex place-content-center">
                 <Pagination
                   currentPage={page}
                   allPage={qcRecords?.allPage}

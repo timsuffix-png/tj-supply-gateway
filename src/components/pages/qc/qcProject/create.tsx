@@ -96,41 +96,43 @@ export default function CreateQcProject() {
   return (
     <>
       <div className="flex w-screen h-screen">
-        <SideBar />
+        <div>
+          <SideBar />
+        </div>
         <div className="flex flex-col w-full h-full">
           <Breadcrumb />
           <div className="flex flex-col bg-white w-full h-full overflow-y-auto whitespace-nowrap place-items-center pt-[20px]">
-            <div className="flex flex-row w-full place-items-center">
-              <div className="flex place-items-center">
+            <div className="flex flex-col sm:flex-row w-full sm:place-content-between sm:place-items-center">
+              <div className="flex flex-row w-full place-content-start place-items-center">
                 <div
                   tabIndex={0}
                   onClick={() => {
                     localStorage.setItem("currentUrl", "qc/project");
                     window.location.reload();
                   }}
-                  className="ml-20 cursor-pointer"
+                  className="ml-5 sm:ml-20 cursor-pointer"
                 >
                   <BackButton text="ย้อนกลับ" />
                 </div>
-                <h2 className="ml-20 text-black text-2xl font-bold font-['Sarabun']">
+                <h2 className="ml-5 sm:ml-20 text-black text-lg xl:text-xl 2xl:text-2xl font-bold font-['Sarabun'] text-wrap">
                   สร้างโปรเจ็คการทดสอบ
                 </h2>
               </div>
-              <div className="flex w-full place-content-end mr-20">
+              <div className="w-full flex place-content-center mt-3 sm:mt-0 sm:w-auto sm:pr-5 lg:pr-20">
                 <SubmitButton text="สร้าง" onClick={createQcProject} />
               </div>
             </div>
-            <div className="bg-white w-full h-auto flex flex-col place-items-center place-content-center">
-              <div className="w-[1000px] h-auto flex flex-col place-items-center place-content-between border-black border-2 rounded-[15px]">
-                <div className="mx-10 my-10 w-[90%] h-auto flex flex-col text-black text-xl font-['Sarabun']">
+            <div className="bg-white w-full flex flex-col place-items-center place-content-center">
+              <div className="w-full sm:w-[90%] mt-5 flex flex-col place-items-center place-content-between border-black border-2 rounded-[15px]">
+                <div className="mx-10 my-10 w-[90%] flex flex-col text-black text-xl font-['Sarabun']">
                   <div className="w-full h-auto mb-5 flex text-black">
                     <label className="w-[100%]">
-                      <h4 className="text-xl font-normal font-['Sarabun']">
+                      <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                         ชื่อโปรเจ็คการทดสอบ
                         <span className="text-red-600">&nbsp;*</span>
                       </h4>
                       <input
-                        className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                        className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                         type="text"
                         maxLength={100}
                         placeholder="ชื่อโปรเจ็คการทดสอบ"
@@ -141,7 +143,7 @@ export default function CreateQcProject() {
                   </div>
                   <div className="w-full h-auto mb-5 flex text-black">
                     <label className="w-full">
-                      <h4 className="text-xl font-normal font-['Sarabun']">
+                      <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                         การทดสอบ
                         <span className="text-red-600">&nbsp;*</span>
                       </h4>
@@ -160,11 +162,11 @@ export default function CreateQcProject() {
                   <div className="w-full h-auto mb-5 flex text-black">
                     <div className="w-full h-full">
                       <label className="w-auto h-auto">
-                        <h4 className="text-xl font-normal font-['Sarabun']">
+                        <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                           รายละเอียด
                         </h4>
                         <textarea
-                          className="bg-white border border-black w-full h-[150px] min-h-[50px] max-h-[150px] rounded-lg text-2xl font-normal font-['Sarabun'] px-2 py-2"
+                          className="bg-white border border-black w-full h-[150px] min-h-[50px] max-h-[150px] rounded-lg text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] px-2 py-2"
                           maxLength={200}
                           onChange={(e) => setDetail(e.target.value)}
                         ></textarea>

@@ -216,34 +216,36 @@ export default function Seaward() {
   return (
     <>
       <div className="flex w-screen h-screen">
-        <SideBar />
+        <div>
+          <SideBar />
+        </div>
         <div className="flex flex-col w-full h-full">
           <Breadcrumb />
           <div className="flex flex-col bg-white w-full h-full overflow-y-auto whitespace-nowrap place-items-center pt-5">
-            <div className="flex w-full">
-              <div className="w-1/12 ml-10">
+            <div className="flex flex-col lg:flex-row w-full">
+              <div className="w-full lg:w-2/12 px-10 lg:px-0 lg:ml-10">
                 <div className="w-full">
-                  <h4 className="text-xl font-normal font-['Sarabun']">
+                  <h4 className="text-lg xl:text-xl font-normal font-['Sarabun']">
                     Seaward port
                     <span className="text-red-600">&nbsp;*</span>
                   </h4>
-                  <div className="text-black text-xl flex place-content-between w-full mt-2">
+                  <div className="text-black text-lg xl:text-xl flex place-content-start w-full lg:mt-3">
                     {currentCOMPort ? <h1>{"COM" + currentCOMPort}</h1> : null}
-                    <button onClick={openPopup}>
+                    <button className="ml-5" onClick={openPopup}>
                       {currentCOMPort ? "เปลี่ยน?" : "เลือก?"}
                     </button>
                   </div>
                 </div>
               </div>
-              <div className="w-2/12 ml-10">
+              <div className="w-full lg:w-3/12 px-10 lg:px-0">
                 <label className="w-full">
-                  <h4 className="text-xl font-normal font-['Sarabun']">
+                  <h4 className="text-lg xl:text-xl font-normal font-['Sarabun']">
                     โปรเจ็คการทดสอบ
                     <span className="text-red-600">&nbsp;*</span>
                   </h4>
                   {!isSelectedCard ? (
                     <Select
-                      className="rounded-md border border-black text-black text-xl font-normal font-['Sarabun']"
+                      className="rounded-md border border-black text-black text-lg xl:text-xl font-normal font-['Sarabun']"
                       name="formulaProject"
                       closeMenuOnSelect={true}
                       options={qcProjects?.data?.map((data) => ({
@@ -253,20 +255,20 @@ export default function Seaward() {
                       onChange={(e) => setQcProject(e.value)}
                     />
                   ) : (
-                    <h1 className="text-red-600 text-xl h-10 flex place-items-end">
+                    <h1 className="text-red-600 text-lg xl:text-xl h-10 flex place-items-end">
                       มีการทดสอบที่ถูกเลือกแล้ว
                     </h1>
                   )}
                 </label>
               </div>
-              <div className="w-9/12 mx-10">
+              <div className="w-full lg:w-7/12 px-10 lg:px-0 lg:mr-10 lg:ml-5">
                 <label className="w-full">
-                  <h4 className="text-xl font-normal font-['Sarabun']">
+                  <h4 className="text-lg xl:text-xl font-normal font-['Sarabun']">
                     รหัสสินค้า
                     <span className="text-red-600">&nbsp;*</span>
                   </h4>
                   <input
-                    className="h-[40px] w-full border border-black mt-1 px-3 text-xl font-normal font-['Sarabun'] rounded-md"
+                    className="h-[40px] w-full border border-black mt-1 px-3 text-lg xl:text-xl font-normal font-['Sarabun'] rounded-md"
                     type="text"
                     placeholder="รหัสสินค้า"
                     onClick={(e: any) => {
@@ -288,25 +290,25 @@ export default function Seaward() {
             )}
             <div className="flex flex-col w-full mt-10">
               <div className="flex flex-row w-full place-items-center">
-                <h2 className="ml-40 text-black text-xl font-normal font-['Sarabun']">
+                <h2 className="ml-40 text-black text-lg xl:text-xl font-normal font-['Sarabun']">
                   รายการการทดสอบ
                 </h2>
               </div>
-              <div className="ml-10 mr-20 mt-10 flex flex-col place-content-center border border-[#cecece] rounded-xl">
+              <div className="sm:ml-10 sm:mr-20 mt-10 flex flex-col place-content-center border border-[#cecece] rounded-xl">
                 <div className="flex place-content-center">
                   <div className="w-[95%] my-[20px]">
                     <div className="text-black font-bold">
                       <div className="bg-[#6494d3] rounded-t-3xl flex flex-row h-10 place-items-center">
-                        <div className="w-3/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-3/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ชื่อการทดสอบ
                         </div>
-                        <div className="w-3/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-3/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           สถานะ
                         </div>
-                        <div className="w-5/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-5/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ผลลัพธ์
                         </div>
-                        <div className="w-1/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-1/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ข้อมูล
                         </div>
                       </div>
@@ -317,27 +319,31 @@ export default function Seaward() {
                           return (
                             <div key={elementKey1++}>
                               <div className="flex flex-row w-full h-12 hover:bg-gray-200">
-                                <div className="w-3/12 text-start text-lg font-['Sarabun'] flex place-items-center">
-                                  {Translator.qc.icon}
-                                  <h5 className="ml-1">
+                                <div className="w-3/12 text-start text-base lg:text-lg font-['Sarabun'] flex place-items-center">
+                                  <div className="hidden md:block">
+                                    {Translator.qc.icon}
+                                  </div>
+                                  <h5 className="md:ml-1 text-ellipsis overflow-hidden">
                                     {data.qcMain.testName}
                                   </h5>
                                 </div>
-                                <div className="w-3/12 text-center text-lg font-['Sarabun'] flex place-content-center place-items-center">
+                                <div className="w-3/12 text-center text-base lg:text-lg font-['Sarabun'] flex place-content-center place-items-center">
                                   {data.qcMain.status === "Passed" ? (
-                                    <h3 className="text-[#13A452] bg-[#adff9d] px-2 text-sm rounded-xl">
+                                    <h3 className="text-[#13A452] bg-[#adff9d] px-2 text-sm rounded-xl text-ellipsis overflow-hidden">
                                       ผ่าน
                                     </h3>
                                   ) : data.qcMain.status === "Failed" ? (
-                                    <h3 className="text-[#ff0000] bg-[#ffa6a6] px-2 text-sm rounded-xl">
+                                    <h3 className="text-[#ff0000] bg-[#ffa6a6] px-2 text-sm rounded-xl text-ellipsis overflow-hidden">
                                       ไม่ผ่าน
                                     </h3>
                                   ) : null}
                                 </div>
-                                <div className="w-5/12 text-center text-lg font-['Sarabun'] flex place-content-center place-items-center">
-                                  {data.qcMain.result}
+                                <div className="w-5/12 text-center text-base lg:text-lg font-['Sarabun'] flex place-content-center place-items-center">
+                                  <h3 className="text-black text-ellipsis overflow-hidden">
+                                    {data.qcMain.result}
+                                  </h3>
                                 </div>
-                                <div className="w-1/12 text-center text-lg font-['Sarabun'] flex place-content-center place-items-center">
+                                <div className="w-1/12 text-center text-base lg:text-lg font-['Sarabun'] flex place-content-center place-items-center">
                                   <button
                                     onClick={() => {
                                       if (revealValue.current[index]) {

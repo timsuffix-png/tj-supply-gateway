@@ -76,18 +76,22 @@ export default function QcProject() {
   return (
     <>
       <div className="flex w-screen h-screen">
-        <SideBar />
+        <div>
+          <SideBar />
+        </div>
         <div className="flex flex-col w-full h-full">
           <Breadcrumb />
           <div className="flex flex-col bg-white w-full h-full overflow-y-auto whitespace-nowrap place-items-center pt-5">
-            <div className="flex flex-row w-full place-items-center">
-              <div tabIndex={0} onClick={()=>{localStorage.setItem("currentUrl", "qc");window.location.reload()}} className="ml-20 cursor-pointer">
-                <BackButton text="ย้อนกลับ" />
+            <div className="flex flex-col sm:flex-row w-full sm:place-content-between sm:place-items-center">
+              <div className="flex flex-row w-full place-content-start place-items-center">
+                <div tabIndex={0} onClick={()=>{localStorage.setItem("currentUrl", "qc");window.location.reload()}} className="ml-5 sm:ml-20 cursor-pointer">
+                  <BackButton text="ย้อนกลับ" />
+                </div>
+                <h2 className="ml-5 sm:ml-20 text-black text-lg xl:text-xl 2xl:text-2xl font-bold font-['Sarabun'] text-wrap">
+                  โปรเจ็คการทดสอบ
+                </h2>
               </div>
-              <h2 className="ml-20 text-black text-2xl font-bold font-['Sarabun']">
-                โปรเจ็คการทดสอบ
-              </h2>
-              <div className="flex w-full place-content-end mr-20">
+              <div className="flex w-full place-content-center mt-3 sm:mt-0 sm:w-auto sm:pr-5 lg:pr-20">
                 <div tabIndex={0} onClick={()=>{localStorage.setItem("currentUrl", "qc/project/create");window.location.reload()}} className="ml-20 cursor-pointer">
                   <SubmitButton text="สร้าง" />
                 </div>
@@ -98,11 +102,11 @@ export default function QcProject() {
                 return (
                   <div
                     key={project.ID}
-                    className="ml-10 mr-20 mt-10 pb-10 flex flex-col place-content-center place-items-center border border-[#cecece] rounded-xl shadow-lg"
+                    className="sm:ml-10 sm:mr-20 mt-10 pb-10 flex flex-col place-content-center place-items-center border border-[#cecece] rounded-xl shadow-lg"
                   >
                     <div className="w-full flex place-content-between px-5 mt-2">
                       <div className="flex place-items-end">
-                        <h3 className="text-black text-xl font-bold font-['Sarabun']">
+                        <h3 className="text-black text-lg lg:text-xl font-bold font-['Sarabun']">
                           {project.projectName}
                         </h3>
                       </div>
@@ -138,7 +142,7 @@ export default function QcProject() {
                         </button>
                       </div>
                     </div>
-                    <h4 className="text-gray-500 w-full text-base font-normal font-['Sarabun'] ml-16 mt-5">
+                    <h4 className="text-gray-500 w-full text-base font-normal font-['Sarabun'] pl-16 mt-5">
                       รายละเอียด
                     </h4>
                     <div className="w-[92%] h-auto my-[20px] flex flex-col place-content-start">
@@ -149,10 +153,10 @@ export default function QcProject() {
                         <div className="mt-5">
                           <div className="text-black font-bold">
                             <div className="bg-[#6494d3] rounded-t-3xl flex flex-row h-10 place-items-center">
-                              <div className="w-4/12 text-center text-lg font-bold font-['Sarabun']">
+                              <div className="w-4/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                                 ชื่อการทดสอบ
                               </div>
-                              <div className="w-8/12 text-center text-lg font-bold font-['Sarabun']">
+                              <div className="w-8/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                                 รายละเอียด
                               </div>
                             </div>
@@ -161,15 +165,19 @@ export default function QcProject() {
                             return (
                               <div key={itemProject.ID} className="text-black">
                                 <div className="flex flex-row w-full h-12 hover:bg-gray-200">
-                                  <div className="w-4/12 text-start text-lg font-['Sarabun'] flex place-items-center place-content-start overflow-hidden">
-                                    {Translator.qc.icon}
-                                    <h5 className="ml-1">
+                                  <div className="w-4/12 text-start text-base lg:text-lg font-['Sarabun'] flex place-items-center place-content-start">
+                                    <div className="hidden sm:block">
+                                      {Translator.qc.icon}
+                                    </div>
+                                    <h5 className="sm:ml-1 text-ellipsis overflow-hidden">
                                       {itemProject.qcMain.testName}
                                     </h5>
                                   </div>
-                                  <div className="w-8/12 text-start text-lg font-['Sarabun'] flex place-items-center place-content-start overflow-hidden">
-                                    {Translator.detail.icon}
-                                    <h5 className="ml-1 text-ellipsis overflow-hidden">
+                                  <div className="w-8/12 text-start text-base lg:text-lg font-['Sarabun'] flex place-items-center place-content-start">
+                                    <div className="hidden sm:block">
+                                      {Translator.detail.icon}
+                                    </div>
+                                    <h5 className="sm:ml-1 text-ellipsis overflow-hidden">
                                       {itemProject.qcMain.detail}
                                     </h5>
                                   </div>
@@ -183,7 +191,7 @@ export default function QcProject() {
                   </div>
                 );
               })}
-              <div className="flex place-content-center ml-10 mr-20">
+              <div className="flex place-content-center">
                 <Pagination
                   currentPage={page}
                   allPage={qcProject?.allPage}

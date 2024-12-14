@@ -98,7 +98,9 @@ export default function QcType() {
   return (
     <>
       <div className="flex w-screen h-screen scroll-smooth">
-        <SideBar />
+        <div>
+          <SideBar />
+        </div>
         <div className="flex flex-col w-full h-full">
           <Breadcrumb />
           <div className="flex flex-col bg-white w-full h-full overflow-y-auto whitespace-nowrap place-items-center pt-[60px]">
@@ -109,53 +111,55 @@ export default function QcType() {
                   localStorage.setItem("currentUrl", "qc/testSetting/create");
                   window.location.reload();
                 }}
-                className="ml-20 cursor-pointer"
+                className="ml-5 sm:ml-20 cursor-pointer"
               >
                 <BackButton text="ย้อนกลับ" />
               </div>
-              <h2 className="ml-20 text-black text-2xl font-bold font-['Sarabun']">
+              <h2 className="ml-5 sm:ml-20 text-black text-lg xl:text-xl 2xl:text-2xl font-bold font-['Sarabun']">
                 ประเภทการทดสอบ
               </h2>
             </div>
             <div className="flex flex-col w-full mt-10">
               <div className="flex flex-row w-full place-items-center">
-                <h2 className="ml-40 text-black text-xl font-normal font-['Sarabun']">
+                <h2 className="ml-16 lg:ml-40 text-black text-lg xl:text-xl font-normal font-['Sarabun']">
                   เพิ่มรายการประเภทการทดสอบ
                 </h2>
               </div>
-              <div className="flex place-items-center place-content-center mt-10">
-                <label className="mx-20 w-1/2 flex flex-col">
-                  <h4 className="text-xl text-black font-normal font-['Sarabun']">
+              <div className="flex flex-col sm:flex-row place-items-center place-content-center mt-10">
+                <label className="mx-20 w-3/4 sm:w-1/2 flex flex-col">
+                  <h4 className="text-lg xl:text-xl text-black font-normal font-['Sarabun']">
                     ชื่อประเภทการทดสอบ
                     <span className="text-red-600">&nbsp;*</span>
                   </h4>
                   <input
                     type="text"
-                    className="h-[50px] border border-black px-3 text-black text-2xl font-normal font-['Sarabun'] rounded-md"
+                    className="h-[40px] md:h-[50px] w-[90%] xl:w-[600px] border border-black mt-1 lg:ml-10 px-3 text-black text-xl xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                     placeholder="ชื่อประเภทการทดสอบ"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </label>
-                <SubmitButton text="บันทึก" onClick={addQcType} />
+                <div className="w-full sm:w-auto flex place-content-end mt-5 sm:mt-0 pr-20">
+                  <SubmitButton text="บันทึก" onClick={addQcType} />
+                </div>
               </div>
               <div className="flex flex-row w-full place-items-center mt-10">
-                <h2 className="ml-40 text-black text-xl font-normal font-['Sarabun']">
+                <h2 className="ml-16 lg:ml-40 text-black text-lg xl:text-xl font-normal font-['Sarabun']">
                   รายการประเภทการทดสอบ
                 </h2>
               </div>
-              <div className="ml-10 mr-20 mt-10 flex flex-col place-content-center border border-[#cecece] rounded-xl">
+              <div className="sm:ml-10 sm:mr-20 mt-10 flex flex-col place-content-center border border-[#cecece] rounded-xl">
                 <div className="flex place-content-center">
                   <div className="w-[95%] my-[20px]">
                     <div className="text-black font-bold">
                       <div className="bg-[#6494d3] rounded-t-3xl flex flex-row h-10 place-items-center">
-                        <div className="w-6/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-6/12 text-center text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ชื่อประเภทการทดสอบ
                         </div>
-                        <div className="w-3/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-3/12 text-center text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           แก้ไข
                         </div>
-                        <div className="w-3/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-3/12 text-center text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ลบ
                         </div>
                       </div>
@@ -168,8 +172,10 @@ export default function QcType() {
                             className="flex flex-row w-full h-12 hover:bg-gray-200"
                           >
                             <div className="w-6/12 text-start text-lg font-['Sarabun'] flex place-items-center">
-                              {Translator.type.icon}
-                              <h5 className="ml-5">{data.name}</h5>
+                              <div className="hidden sm:block">
+                                {Translator.type.icon}
+                              </div>
+                              <h5 className="sm:ml-5 text-ellipsis overflow-hidden">{data.name}</h5>
                             </div>
                             <div className="w-3/12 text-center text-lg font-['Sarabun'] flex place-content-center place-items-center">
                               <button
@@ -222,7 +228,7 @@ export default function QcType() {
                   </div>
                 </div>
               </div>
-              <div className="flex place-content-center ml-10 mr-20">
+              <div className="flex place-content-center">
                 <Pagination
                   currentPage={page}
                   allPage={qcType?.allPage}

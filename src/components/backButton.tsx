@@ -4,7 +4,7 @@ export default function BackButton({ ...props }) {
   }
 
   return (
-    <div className={"w-[150px] h-14 " + props.className}>
+    <div className={"w-[125px] 2xl:w-[150px] h-10 2xl:h-14 " + props.className}>
       <div className="w-full h-full border-4 border-[#001F3F] rounded-[10px] flex flex-row place-items-center group">
         <svg
           className="group-hover:w-20 transition-all"
@@ -19,7 +19,7 @@ export default function BackButton({ ...props }) {
             fill="#001F3F"
           />
         </svg>
-        <div className="w-full h-full text-center text-[#001F3F] text-2xl font-bold font-['Sarabun'] place-content-center">
+        <div className="w-full h-full text-center text-[#001F3F] text-lg 2xl:text-2xl font-bold font-['Sarabun'] place-content-center">
           {props.text}
         </div>
       </div>

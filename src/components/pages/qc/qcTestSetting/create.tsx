@@ -153,7 +153,9 @@ export default function AddTestSetting() {
   return (
     <>
       <div className="flex w-screen h-screen">
-        <SideBar />
+        <div>
+          <SideBar />
+        </div>
         <div className="flex flex-col w-full h-full">
           <Breadcrumb />
           <div className="flex flex-col bg-white w-full h-full overflow-y-auto whitespace-nowrap place-items-center pt-[20px]">
@@ -165,30 +167,30 @@ export default function AddTestSetting() {
                     localStorage.setItem("currentUrl", "qc/testSetting");
                     window.location.reload();
                   }}
-                  className="ml-20 cursor-pointer"
+                  className="ml-5 sm:ml-20 cursor-pointer"
                 >
                   <BackButton text="ย้อนกลับ" />
                 </div>
-                <h2 className="ml-20 text-black text-2xl font-bold font-['Sarabun']">
+                <h2 className="ml-5 sm:ml-20 text-black text-lg xl:text-xl 2xl:text-2xl font-bold font-['Sarabun'] text-wrap sm:text-nowrap">
                   สร้างการทดสอบ
                 </h2>
               </div>
-              <div className="flex w-full place-content-end mr-20">
+              <div className="hidden md:flex w-full place-content-end mr-20">
                 <SubmitButton text="สร้าง" onClick={createNewTest} />
               </div>
             </div>
-            <div className="bg-white w-full h-auto flex flex-col place-items-center place-content-center">
-              <div className="w-[1000px] h-auto flex flex-col place-items-center place-content-between border-black border-2 rounded-[15px]">
-                <div className="mx-10 my-10 w-[90%] h-auto flex flex-col text-black text-xl font-['Sarabun']">
-                  <div className="w-full h-auto flex">
+            <div className="bg-white w-full flex flex-col place-items-center place-content-center">
+              <div className="w-full sm:w-[90%] mt-5 flex flex-col place-items-center place-content-between border-black border-2 rounded-[15px]">
+                <div className="mx-10 my-10 w-[90%] flex flex-col text-black text-xl font-['Sarabun']">
+                  <div className="w-full flex">
                     <div className="w-3/4 h-full flex">
                       <label className="w-[100%]">
-                        <h4 className="text-xl font-normal font-['Sarabun']">
+                        <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                           ประเภทการทดสอบ
                           <span className="text-red-600">&nbsp;*</span>
                         </h4>
                         <select
-                          className="h-[50px] w-full pl-5 border border-black mt-1 text-2xl font-normal font-['Sarabun'] rounded-md"
+                          className="h-[40px] md:h-[50px] w-full pl-5 border border-black mt-1 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                           defaultValue={"none"}
                           onChange={(e) => {
                             setQcType({
@@ -252,7 +254,7 @@ export default function AddTestSetting() {
                         }}
                         className="cursor-pointer"
                       >
-                        <h4 className="text-black text-base">
+                        <h4 className="text-black text-xs sm:text-sm text-wrap">
                           จัดการประเภทการทดสอบ?
                         </h4>
                       </div>
@@ -261,12 +263,12 @@ export default function AddTestSetting() {
                   {qcType.name === "seaward" && (
                     <div className="w-full h-auto my-2 flex text-black">
                       <label className="w-[100%]">
-                        <h4 className="text-xl font-normal font-['Sarabun']">
+                        <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                           ชนิดการทดสอบ
                           <span className="text-red-600">&nbsp;*</span>
                         </h4>
                         <select
-                          className="h-[50px] w-full pl-5 border border-black mt-1 text-2xl font-normal font-['Sarabun'] rounded-md"
+                          className="h-[40px] md:h-[50px] w-full pl-5 border border-black mt-1 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                           defaultValue={"none"}
                           onChange={(e) => setQcClass(e.target.value)}
                         >
@@ -287,12 +289,12 @@ export default function AddTestSetting() {
                   )}
                   <div className="w-full h-auto my-2 flex text-black">
                     <label className="w-[100%]">
-                      <h4 className="text-xl font-normal font-['Sarabun']">
+                      <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                         ชื่อการทดสอบ
                         <span className="text-red-600">&nbsp;*</span>
                       </h4>
                       <input
-                        className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                        className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                         type="text"
                         maxLength={100}
                         placeholder="ชื่อการทดสอบ"
@@ -304,11 +306,11 @@ export default function AddTestSetting() {
                   <div className="w-full h-auto my-2 flex text-black">
                     <div className="w-full h-full">
                       <label className="w-auto h-auto">
-                        <h4 className="text-xl font-normal font-['Sarabun']">
+                        <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                           รายละเอียด
                         </h4>
                         <textarea
-                          className="bg-white border border-black w-full h-[150px] min-h-[50px] max-h-[150px] rounded-lg text-2xl font-normal font-['Sarabun'] px-2 py-2"
+                          className="bg-white border border-black w-full h-[150px] min-h-[50px] max-h-[150px] rounded-lg text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] px-2 py-2"
                           maxLength={200}
                           onChange={(e) => setDetail(e.target.value)}
                         ></textarea>
@@ -318,13 +320,13 @@ export default function AddTestSetting() {
                   {qcClass && (
                     <div className="w-full h-auto rounded-[15px] border border-black flex flex-col mb-5">
                       <div className="flex flex-wrap place-content-between">
-                        <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                          <h4 className="text-xl font-normal font-['Sarabun']">
+                        <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                          <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                             Output
                             <span className="text-red-600">&nbsp;*</span>
                           </h4>
                           <input
-                            className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                            className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                             type="number"
                             maxLength={50}
                             placeholder="Output"
@@ -338,13 +340,13 @@ export default function AddTestSetting() {
                             required
                           />
                         </label>
-                        <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                          <h4 className="text-xl font-normal font-['Sarabun']">
+                        <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                          <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                             RampUp
                             <span className="text-red-600">&nbsp;*</span>
                           </h4>
                           <input
-                            className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                            className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                             type="number"
                             maxLength={50}
                             placeholder="RampUp"
@@ -358,13 +360,13 @@ export default function AddTestSetting() {
                             required
                           />
                         </label>
-                        <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                          <h4 className="text-xl font-normal font-['Sarabun']">
+                        <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                          <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                             Dwell
                             <span className="text-red-600">&nbsp;*</span>
                           </h4>
                           <input
-                            className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                            className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                             type="number"
                             maxLength={50}
                             placeholder="Dwell"
@@ -378,13 +380,13 @@ export default function AddTestSetting() {
                             required
                           />
                         </label>
-                        <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                          <h4 className="text-xl font-normal font-['Sarabun']">
+                        <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                          <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                             TimeToZero
                             <span className="text-red-600">&nbsp;*</span>
                           </h4>
                           <input
-                            className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                            className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                             type="number"
                             maxLength={50}
                             placeholder="TimeToZero"
@@ -398,13 +400,13 @@ export default function AddTestSetting() {
                             required
                           />
                         </label>
-                        <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                          <h4 className="text-xl font-normal font-['Sarabun']">
+                        <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                          <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                             LowLimit
                             <span className="text-red-600">&nbsp;*</span>
                           </h4>
                           <input
-                            className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                            className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                             type="number"
                             maxLength={50}
                             placeholder="LowLimit"
@@ -418,13 +420,13 @@ export default function AddTestSetting() {
                             required
                           />
                         </label>
-                        <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                          <h4 className="text-xl font-normal font-['Sarabun']">
+                        <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                          <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                             HighLimit
                             <span className="text-red-600">&nbsp;*</span>
                           </h4>
                           <input
-                            className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                            className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                             type="number"
                             maxLength={50}
                             placeholder="HighLimit"
@@ -438,13 +440,13 @@ export default function AddTestSetting() {
                             required
                           />
                         </label>
-                        <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                          <h4 className="text-xl font-normal font-['Sarabun']">
+                        <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                          <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                             ArcDetect
                             <span className="text-red-600">&nbsp;*</span>
                           </h4>
                           <input
-                            className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                            className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                             type="number"
                             maxLength={50}
                             placeholder="ArcDetect"
@@ -458,13 +460,13 @@ export default function AddTestSetting() {
                             required
                           />
                         </label>
-                        <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                          <h4 className="text-xl font-normal font-['Sarabun']">
+                        <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                          <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                             Channel
                             <span className="text-red-600">&nbsp;*</span>
                           </h4>
                           <input
-                            className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                            className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                             type="number"
                             maxLength={50}
                             placeholder="Channel"
@@ -480,13 +482,13 @@ export default function AddTestSetting() {
                         </label>
                         {qcClass === "PWRLK" && (
                           <>
-                            <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                              <h4 className="text-xl font-normal font-['Sarabun']">
+                            <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                              <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                                 LeakageLowLimit
                                 <span className="text-red-600">&nbsp;*</span>
                               </h4>
                               <input
-                                className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                                className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                                 type="number"
                                 maxLength={50}
                                 placeholder="LeakageLowLimit"
@@ -500,13 +502,13 @@ export default function AddTestSetting() {
                                 required
                               />
                             </label>
-                            <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                              <h4 className="text-xl font-normal font-['Sarabun']">
+                            <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                              <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                                 PowerHighLimit
                                 <span className="text-red-600">&nbsp;*</span>
                               </h4>
                               <input
-                                className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                                className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                                 type="number"
                                 maxLength={50}
                                 placeholder="PowerHighLimit"
@@ -520,13 +522,13 @@ export default function AddTestSetting() {
                                 required
                               />
                             </label>
-                            <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                              <h4 className="text-xl font-normal font-['Sarabun']">
+                            <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                              <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                                 PowerLowLimit
                                 <span className="text-red-600">&nbsp;*</span>
                               </h4>
                               <input
-                                className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                                className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                                 type="number"
                                 maxLength={50}
                                 placeholder="PowerLowLimit"
@@ -540,13 +542,13 @@ export default function AddTestSetting() {
                                 required
                               />
                             </label>
-                            <label className="w-[45%] h-auto mx-5 my-3 flex flex-col">
-                              <h4 className="text-xl font-normal font-['Sarabun']">
+                            <label className="w-full md:w-[45%] h-auto mx-5 md:mx-3 lg:mx-5 my-3 flex flex-col">
+                              <h4 className="text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
                                 LeakageHighLimit
                                 <span className="text-red-600">&nbsp;*</span>
                               </h4>
                               <input
-                                className="h-[50px] w-full border border-black mt-1 px-3 text-2xl font-normal font-['Sarabun'] rounded-md"
+                                className="h-[40px] md:h-[50px] w-full border border-black mt-1 px-3 text-base lg:text-lg xl:text-2xl font-normal font-['Sarabun'] rounded-md"
                                 type="number"
                                 maxLength={50}
                                 placeholder="LeakageHighLimit"
@@ -565,6 +567,9 @@ export default function AddTestSetting() {
                       </div>
                     </div>
                   )}
+                  <div className="flex md:hidden w-full place-content-end mr-20 mt-5">
+                    <SubmitButton text="สร้าง" onClick={createNewTest} />
+                  </div>
                 </div>
               </div>
             </div>

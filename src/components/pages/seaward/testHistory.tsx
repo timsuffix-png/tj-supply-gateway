@@ -210,7 +210,7 @@ export default function TestHistory({
   };
 
   return (
-    <div className="flex w-[1500px]">
+    <div className="flex w-[500px] sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1186px]">
       {testHistory && (
         <div className="flex w-full">
           <div className="flex flex-row w-full whitespace-nowrap place-items-center place-content-start overflow-x-auto flex-nowrap">

@@ -8,8 +8,8 @@ export default function Breadcrumb() {
 
   return (
     <div className="bg-white w-full h-14 whitespace-nowrap overflow-x-auto border-b border-black">
-      <div className="w-full h-full flex place-items-center">
-        <div className="ml-5"></div>
+      <div className="w-full h-full 2xl:flex place-items-center hidden">
+        <div className="ml-10"></div>
         {/* {role ? (
           <>
             <Link
@@ -30,10 +30,10 @@ export default function Breadcrumb() {
             </h3>
           </>
         ) : null} */}
-        <h3 className="ml-2 text-black text-2xl font-normal font-['Sarabun']">
+        <h3 className="ml-2 text-black text-xl 2xl:text-2xl font-normal font-['Sarabun']">
           หน้าหลัก
         </h3>
-        <h3 className="ml-2 text-black text-3xl font-bold font-['Sarabun']">
+        <h3 className="ml-2 text-black text-2xl 2xl:text-3xl font-bold font-['Sarabun']">
           /
         </h3>
         {currentUrl.map((path) => {
@@ -42,7 +42,7 @@ export default function Breadcrumb() {
             if (path === currentUrl[currentUrl.length - 1]) {
               return (
                 <button key={path} onClick={() => link}>
-                  <h3 className="ml-2 text-black text-2xl font-normal font-['Sarabun']">
+                  <h3 className="ml-2 text-black text-xl 2xl:text-2xl font-normal font-['Sarabun']">
                     {Translator[path].name}
                   </h3>
                 </button>
@@ -51,11 +51,11 @@ export default function Breadcrumb() {
               return (
                 <div key={path} className="flex">
                   <button onClick={() => link}>
-                    <h3 className="ml-2 text-black text-2xl font-normal font-['Sarabun']">
+                    <h3 className="ml-2 text-black text-xl 2xl:text-2xl font-normal font-['Sarabun']">
                       {Translator[path].name}
                     </h3>
                   </button>
-                  <h3 className="ml-2 text-black text-3xl font-bold font-['Sarabun']">
+                  <h3 className="ml-2 text-black text-2xl 2xl:text-3xl font-bold font-['Sarabun']">
                     /
                   </h3>
                 </div>

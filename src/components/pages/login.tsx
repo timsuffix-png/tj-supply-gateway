@@ -64,72 +64,84 @@ export default function Login() {
 
   if (!auth.user?.data)
     return (
-      <div className="w-screen h-screen relative bg-white">
-        <div className="w-[579px] h-[579px] left-[384px] top-[253px] absolute bg-white rounded-[15px] border-2 border-black"></div>
-        <img
-          className="w-auto h-screen right-[0px] top-0 absolute"
-          ref={ironsImageRef}
-          width={571}
-          height={945}
-          alt="irons"
-        />
-        <div className="w-auto h-auto left-[445px] top-[274px] absolute text-center">
-          <span className="text-black text-[32px] font-bold font-['Sarabun']">
-            ยินดีต้อนรับสู่ระบบจัดการคลังสินค้า
-            <br />
-            <br />
-          </span>
-          <span className="text-black text-2xl font-bold font-['Sarabun']">
-            ลงชื่อเข้าใช้บัญชีของคุณ
-          </span>
-        </div>
-        <img
-          className="w-[254px] h-[60px] left-[80px] top-[80px] absolute"
-          ref={logoImageRef}
-          width={254}
-          height={60}
-          alt="logo"
-        />
-        <div className="w-[118px] h-[49px] left-[452px] top-[444px] absolute text-left text-black text-xl font-normal font-['Sarabun']">
-          ชื่อผู้ใช้งาน
-        </div>
-        <div className="w-[118px] h-[49px] left-[452px] top-[559px] absolute text-left text-black text-xl font-normal font-['Sarabun']">
-          รหัสผ่าน
-        </div>
-        <div className="w-[441px] h-[50px] left-[452px] top-[493px] absolute">
-          <input
-            className="w-[441px] h-[50px] left-0 top-0 absolute bg-white rounded-md border border-black text-black text-2xl px-3 font-normal font-['Sarabun']"
-            type="text"
-            placeholder="ชื่อผู้ใช้งาน"
-            onChange={(e) => setusername(e.target.value)}
-            onKeyDown={handleKeyPress}
-          />
-        </div>
-        <div className="w-[441px] h-[50px] left-[452px] top-[608px] absolute">
-          <input
-            className="w-[441px] h-[50px] left-0 top-0 absolute bg-white rounded-md border border-black text-black text-2xl px-3 font-normal font-['Sarabun']"
-            type="password"
-            placeholder="รหัสผ่าน"
-            onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={handleKeyPress}
-          />
-        </div>
-        <div className="left-[692px] top-[696px] absolute">
-          <SubmitButton text="เข้าสู่ระบบ" onClick={fetchData} />
-        </div>
-        <button
-          onClick={openPopup}
-          className="w-auto h-auto left-[411px] top-[794px] absolute text-neutral-500 text-[13px] font-normal font-['Zen Kaku Gothic Antique'] leading-snug"
-        >
-          เปลี่ยนเส้นทางบันทึกข้อมูล?
-        </button>
-        <div className="w-auto h-auto left-[454px] top-[658px] absolute text-zinc-500 text-[13px] font-normal font-['Zen Kaku Gothic Antique'] leading-snug">
-          ลืมรหัสผ่าน?
-        </div>
-        <div className="w-auto h-auto left-[80px] bottom-[10px] absolute justify-center items-center inline-flex">
-          <div className="text-neutral-400 text-[12.80px] font-normal font-['Zen Kaku Gothic Antique'] leading-snug">
-            <Footer />
+      <div className="w-screen h-screen flex bg-white">
+        <div className="w-full lg:w-8/12 h-full flex flex-col">
+          <div className="w-full h-[20%] flex place-items-center place-content-center sm:place-content-start sm:pl-20">
+            <img
+              className="w-[254px] h-[60px]"
+              ref={logoImageRef}
+              width={254}
+              height={60}
+              alt="logo"
+            />
           </div>
+          <div className="w-full h-[80%] flex flex-col place-items-center">
+            <div className="w-full sm:w-3/4 2xl:w-1/2 h-auto flex flex-col place-items-center bg-white rounded-[15px] border-2 border-black pt-10">
+              <h1 className="text-black text-[23px] lg:text-[27px] xl:text-[32px] font-extrabold font-['Sarabun']">
+                ยินดีต้อนรับสู่ระบบจัดการคลังสินค้า
+              </h1>
+              <h2 className="text-black text-base lg:text-lg xl:text-2xl font-bold font-['Sarabun'] mt-10">
+                ลงชื่อเข้าใช้บัญชีของคุณ
+              </h2>
+              <div className="w-full flex flex-col place-items-center mt-14">
+                <label className="w-3/4">
+                  <h3 className="text-black text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
+                    ชื่อผู้ใช้งาน
+                  </h3>
+                  <input
+                    className="w-full h-[40px] md:h-[50px] bg-white rounded-md border border-black text-black text-base lg:text-lg xl:text-2xl px-3 font-normal font-['Sarabun']"
+                    type="text"
+                    placeholder="ชื่อผู้ใช้งาน"
+                    onChange={(e) => setusername(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                  />
+                </label>
+                <label className="w-3/4 mt-5">
+                  <h3 className="text-black text-base lg:text-lg xl:text-xl font-normal font-['Sarabun']">
+                    รหัสผ่าน
+                  </h3>
+                  <input
+                    className="w-full h-[40px] md:h-[50px] bg-white rounded-md border border-black text-black text-base lg:text-lg xl:text-2xl px-3 font-normal font-['Sarabun']"
+                    type="password"
+                    placeholder="รหัสผ่าน"
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                  />
+                </label>
+              </div>
+              <div className="w-full flex place-content-center">
+                <div className="w-3/4">
+                  <h5 className="text-zinc-500 text-[10px] md:text-xs font-normal font-['Sarabun'] leading-snug mt-1">
+                    ลืมรหัสผ่าน?
+                  </h5>
+                </div>
+              </div>
+              <div className="w-full flex place-content-center">
+                <div className="w-3/4 flex place-content-end mt-5">
+                  <SubmitButton text="เข้าสู่ระบบ" onClick={fetchData} />
+                </div>
+              </div>
+              <div className="w-full">
+                <button className="mt-10 ml-5 mb-3" onClick={openPopup}>
+                  <h5 className="text-neutral-500 text-[10px] md:text-xs font-normal font-['Sarabun'] leading-snug">
+                    เปลี่ยนเส้นทางบันทึกข้อมูล?
+                  </h5>
+                </button>
+              </div>
+            </div>
+            <div className="h-full flex place-items-end place-content-center w-full">
+              <Footer />
+            </div>
+          </div>
+        </div>
+        <div className="w-4/12 h-full hidden lg:block">
+          <img
+            className="w-full h-full"
+            ref={ironsImageRef}
+            width={571}
+            height={945}
+            alt="irons"
+          />
         </div>
         {apiPopup && (
           <Popup onClose={closePopup}>

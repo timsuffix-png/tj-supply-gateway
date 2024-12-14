@@ -17,7 +17,7 @@ export default function Pagination({ ...props }) {
 
   return (
     <>
-      <div className="flex place-content-center place-items-center w-[470px] h-[70px]">
+      <div className="flex place-content-center place-items-center w-[470px] h-[70px] scale-75 sm:scale-100">
         {1 < props["currentPage"] ? (
           <>
             <div className="flex mr-5">

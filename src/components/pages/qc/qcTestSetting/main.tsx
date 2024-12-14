@@ -67,25 +67,29 @@ export default function QcSetting() {
   return (
     <>
       <div className="flex w-screen h-screen">
-        <SideBar />
+        <div>
+          <SideBar />
+        </div>
         <div className="flex flex-col w-full h-full">
           <Breadcrumb />
           <div className="flex flex-col bg-white w-full h-full overflow-y-auto whitespace-nowrap place-items-center pt-[20px]">
-            <div className="flex flex-row w-full place-items-center">
-              <div
-                tabIndex={0}
-                onClick={() => {
-                  localStorage.setItem("currentUrl", "qc");
-                  window.location.reload();
-                }}
-                className="ml-20 cursor-pointer"
-              >
-                <BackButton text="ย้อนกลับ" />
+            <div className="flex flex-col sm:flex-row w-full sm:place-content-between sm:place-items-center">
+              <div className="flex flex-row w-full place-content-start place-items-center">
+                <div
+                  tabIndex={0}
+                  onClick={() => {
+                    localStorage.setItem("currentUrl", "qc");
+                    window.location.reload();
+                  }}
+                  className="ml-5 sm:ml-20 cursor-pointer"
+                >
+                  <BackButton text="ย้อนกลับ" />
+                </div>
+                <h2 className="ml-5 sm:ml-20 text-black text-lg xl:text-xl 2xl:text-2xl font-bold font-['Sarabun'] text-wrap">
+                  ตั้งค่าการทดสอบ
+                </h2>
               </div>
-              <h2 className="ml-20 text-black text-2xl font-bold font-['Sarabun']">
-                ตั้งค่าการทดสอบ
-              </h2>
-              <div className="flex w-full place-content-end mr-20">
+              <div className="flex w-full place-content-center mt-3 sm:mt-0 sm:w-auto sm:pr-5 lg:pr-20">
                 <div
                   tabIndex={0}
                   onClick={() => {
@@ -98,24 +102,24 @@ export default function QcSetting() {
               </div>
             </div>
             <div className="flex flex-col w-full mt-[30px]">
-              <div className="ml-10 mr-20 mt-10 flex flex-col place-content-center border border-[#cecece] rounded-xl">
+              <div className="sm:ml-10 sm:mr-20 mt-10 flex flex-col place-content-center border border-[#cecece] rounded-xl">
                 <div className="flex place-content-center">
                   <div className="w-[95%] my-[20px]">
                     <div className="text-black font-bold">
                       <div className="bg-[#6494d3] rounded-t-3xl flex flex-row h-10 place-items-center">
-                        <div className="w-2/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-2/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ประเภท
                         </div>
-                        <div className="w-3/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-3/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ชื่อการทดสอบ
                         </div>
-                        <div className="w-5/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-5/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           รายละเอียด
                         </div>
-                        <div className="w-1/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-1/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           แก้ไข
                         </div>
-                        <div className="w-1/12 text-center text-lg font-bold font-['Sarabun']">
+                        <div className="w-1/12 text-center text-base lg:text-lg font-bold font-['Sarabun'] text-ellipsis overflow-hidden">
                           ลบ
                         </div>
                       </div>
@@ -127,17 +131,19 @@ export default function QcSetting() {
                             key={data.ID}
                             className="flex flex-row w-full h-12 hover:bg-gray-200"
                           >
-                            <div className="w-2/12 text-start text-lg font-['Sarabun'] flex place-content-start place-items-center">
-                              {Translator.type.icon}
-                              <h5 className="ml-1">{data.qcType.name}</h5>
+                            <div className="w-2/12 text-start text-base lg:text-lg font-['Sarabun'] flex place-content-start place-items-center">
+                              <div className="hidden sm:block">
+                                {Translator.type.icon}
+                              </div>
+                              <h5 className="sm:ml-1 text-ellipsis overflow-hidden">{data.qcType.name}</h5>
                             </div>
-                            <div className="w-3/12 text-center text-lg font-['Sarabun'] flex place-content-start place-items-center">
-                              <h5 className="">{data.testName}</h5>
+                            <div className="w-3/12 text-center text-base lg:text-lg font-['Sarabun'] flex place-content-start place-items-center">
+                              <h5 className="text-ellipsis overflow-hidden">{data.testName}</h5>
                             </div>
-                            <div className="w-5/12 text-center text-lg font-['Sarabun'] flex place-content-start place-items-center">
-                              <h5 className="">{data.detail}</h5>
+                            <div className="w-5/12 text-center text-base lg:text-lg font-['Sarabun'] flex place-content-start place-items-center">
+                              <h5 className="text-ellipsis overflow-hidden">{data.detail}</h5>
                             </div>
-                            <div className="w-1/12 text-center text-lg font-['Sarabun'] flex place-content-center place-items-center">
+                            <div className="w-1/12 text-center text-base lg:text-lg font-['Sarabun'] flex place-content-center place-items-center text-ellipsis overflow-hidden">
                               <button
                                 onClick={() => {
                                   localStorage.setItem(
@@ -151,7 +157,7 @@ export default function QcSetting() {
                                 {Translator.edit.icon}
                               </button>
                             </div>
-                            <div className="w-1/12 text-center text-lg font-['Sarabun'] flex place-content-center place-items-center">
+                            <div className="w-1/12 text-center text-base lg:text-lg font-['Sarabun'] flex place-content-center place-items-center text-ellipsis overflow-hidden">
                               <button
                                 onClick={() => {
                                   Swal.fire({
@@ -189,7 +195,7 @@ export default function QcSetting() {
                   </div>
                 </div>
               </div>
-              <div className="flex place-content-center ml-10 mr-20">
+              <div className="flex place-content-center">
                 <Pagination
                   currentPage={page}
                   allPage={qcMain?.allPage}
