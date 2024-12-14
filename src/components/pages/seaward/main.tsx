@@ -274,6 +274,7 @@ export default function Seaward() {
                     onClick={(e: any) => {
                       e.target.value = "";
                       setSerialNumber("");
+                      setIsSelectedCard(false);
                     }}
                     onChange={(e) => setSerialNumber(e.target.value)}
                     required
