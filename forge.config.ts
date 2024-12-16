@@ -18,6 +18,7 @@ const config: ForgeConfig = {
     extraResource: [
       "./public/irons.png",
       "./public/logo.png",
+      "./public/user.png",
       "./public/loading.gif",
       "./src/asset/FAKEssscmdproto.exe",
       "./src/asset/ssscmdproto.exe"
