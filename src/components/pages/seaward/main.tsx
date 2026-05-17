@@ -202,10 +202,14 @@ export default function Seaward() {
           qcRecordID: record.data[0].ID,
           qcMainID: qcMains.data[i].qcMain.ID,
           status: newQcMains.data[i].qcMain.status,
-          detail:
-            newQcMains.data[i].qcMain.status === "Passed"
-              ? ""
-              : splitResultArray[0].split(":")[3].trim(),
+          detail: (() => {
+            const measurements = splitResultArray.slice(1).map((s: string) => s.trim()).join(", ");
+            if (newQcMains.data[i].qcMain.status === "Passed") {
+              return measurements + ", Passed";
+            }
+            const failureReason = splitResultArray[0].split(":")[3]?.trim() || "";
+            return measurements + ", Failed, " + failureReason;
+          })(),
         },
       });
     }
