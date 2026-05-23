@@ -352,26 +352,19 @@ app.on("ready", async () => {
         ? "DCIR"
         : "PWRLK";
 
-      if (
-        existsSync(path.join(process.cwd(), "resources", "FAKEssscmdproto.exe"))
-      ) {
-        const result = await execAsync(
-          `cmd /c ${path.join(
-            process.cwd(),
-            "resources",
-            "FAKEssscmdproto.exe"
-          )} ${type}`
-        );
+      const isWindows = process.platform === "win32";
+
+      if (isWindows) {
+        const exePath = existsSync(path.join(process.cwd(), "resources", "FAKEssscmdproto.exe"))
+          ? path.join(process.cwd(), "resources", "FAKEssscmdproto.exe")
+          : path.join(process.cwd(), "src", "asset", "FAKEssscmdproto.exe");
+        const result = await execAsync(`cmd /c ${exePath} ${type}`);
         return result.stdout;
       } else {
-        const result = await execAsync(
-          `cmd /c ${path.join(
-            process.cwd(),
-            "src",
-            "asset",
-            "FAKEssscmdproto.exe"
-          )} ${type}`
-        );
+        const pyPath = existsSync(path.join(process.cwd(), "resources", "FAKEssscmdproto.py"))
+          ? path.join(process.cwd(), "resources", "FAKEssscmdproto.py")
+          : path.join(process.cwd(), "src", "asset", "FAKEssscmdproto.py");
+        const result = await execAsync(`python3 ${pyPath} ${type}`);
         return result.stdout;
       }
     }
