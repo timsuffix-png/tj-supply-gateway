@@ -169,7 +169,7 @@ export default function Seaward() {
         script += value + ", ";
       }
       script = script.substring(0, script.length - 2) + ")\n";
-      const result = await window.electronAPI.sssTest({
+      const result = await window.electronAPI.fakeSssTest({
         script: script,
         COM: currentCOMPort,
       });
