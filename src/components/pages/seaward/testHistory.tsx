@@ -218,6 +218,7 @@ export default function TestHistory({
               if (
                 data.tag === "qcRecord" &&
                 remainingTest &&
+                remainingTest[index] &&
                 remainingTest[index].filter(
                   (v) => v.qcType.name.toLowerCase() == "seaward"
                 ).length > 0
