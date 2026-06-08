@@ -91,6 +91,8 @@ export default function Seaward() {
   let elementKey1 = 0;
   let elementKey2 = 0;
   const [isSelectedCard, setIsSelectedCard] = useState(false);
+  // ref สำหรับ input รหัสสินค้า เพื่อ set value หลัง lookup encrypted QR
+  const serialInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchData();
@@ -114,6 +116,34 @@ export default function Seaward() {
     }
     setQcProjects(qcProjectData);
     setCurrentCOMPort(Number(await window.electronAPI.getSeawardCOMPort()));
+  };
+
+  // scanner อ่าน QR → ได้ encryptedValue (ขึ้นต้นด้วย U2FsdGVkX1)
+  // → เรียก construct/encrypt API → return Construct.ID (serial จริง)
+  const lookupEncryptedSerial = async (encryptedValue: string) => {
+    try {
+      const res = await window.electronAPI.fetch({
+        method: "POST",
+        URL: "construct/encrypt",
+        body: { encryptSerialNumber: encryptedValue },
+      });
+
+      if (res?.data?.ID) {
+        const realSerial: string = res.data.ID;
+        setSerialNumber(realSerial);
+        if (serialInputRef.current) serialInputRef.current.value = realSerial;
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "QR Code ไม่ถูกต้อง",
+          text: "ไม่พบข้อมูลสินค้าในระบบ กรุณาตรวจสอบอีกครั้ง",
+        });
+        setSerialNumber("");
+        if (serialInputRef.current) serialInputRef.current.value = "";
+      }
+    } catch (err) {
+      console.error("lookupEncryptedSerial error:", err);
+    }
   };
 
   const seawardTest = async () => {
@@ -272,6 +302,7 @@ export default function Seaward() {
                     <span className="text-red-600">&nbsp;*</span>
                   </h4>
                   <input
+                    ref={serialInputRef}
                     className="h-[40px] w-full border border-black mt-1 px-3 text-lg xl:text-xl font-normal font-['Sarabun'] rounded-md"
                     type="text"
                     placeholder="รหัสสินค้า"
@@ -280,7 +311,23 @@ export default function Seaward() {
                       setSerialNumber("");
                       setIsSelectedCard(false);
                     }}
-                    onChange={(e) => setSerialNumber(e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      // ถ้าเป็น encrypted QR รอให้ scanner ส่ง Enter ก่อน ค่อย lookup
+                      if (!val.startsWith("U2FsdGVkX1")) {
+                        setSerialNumber(val);
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      // scanner ส่ง Enter หลังสแกน → ตรวจว่าเป็น encrypted QR มั้ย
+                      if (e.key === "Enter") {
+                        const val = (e.target as HTMLInputElement).value;
+                        if (val.startsWith("U2FsdGVkX1")) {
+                          e.preventDefault();
+                          lookupEncryptedSerial(val);
+                        }
+                      }
+                    }}
                     required
                   />
                 </label>
