@@ -252,7 +252,9 @@ export default function TestHistory({
                     </div>
                     <div className="w-full h-[20%] pl-3 text-start">
                       <h1 className="text-sm">
-                        {data.testBy.name + " " + data.testBy.surname}
+                        {data.testBy
+                          ? data.testBy.name + " " + data.testBy.surname
+                          : "-"}
                       </h1>
                       <h1 className="text-xs">
                         {moment().diff(data.updatedAt, "minutes") < 60

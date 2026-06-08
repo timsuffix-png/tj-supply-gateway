@@ -163,7 +163,7 @@ export default function Seaward() {
     setTesting(true);
     for (let i in qcMains.data) {
       let script = "SSSCMD_HAL_PERFORM_TEST(";
-      if (qcMains.data[i].qcMain.qcType.name.toLowerCase() != "seaward")
+      if (qcMains.data[i].qcMain?.qcType?.name?.toLowerCase() != "seaward")
         continue;
       for (let value of Object.values(qcMains.data[i].qcMain.qcScript.script)) {
         script += value + ", ";
@@ -320,7 +320,7 @@ export default function Seaward() {
                     </div>
                     <div className="text-black">
                       {qcMains?.data?.map((data, index) => {
-                        if (data.qcMain.qcType.name.toLowerCase() == "seaward")
+                        if (data.qcMain?.qcType?.name?.toLowerCase() == "seaward")
                           return (
                             <div key={elementKey1++}>
                               <div className="flex flex-row w-full h-12 hover:bg-gray-200">
