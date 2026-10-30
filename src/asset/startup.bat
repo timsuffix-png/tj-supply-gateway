@@ -1,0 +1,1 @@
+g++ %cd%/src/asset/FAKEssscmdproto.cpp -o %cd%/src/asset/FAKEssscmdproto.exe

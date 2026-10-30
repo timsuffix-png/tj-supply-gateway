@@ -27,7 +27,7 @@ const config: ForgeConfig = {
   rebuildConfig: {},
   makers: [
     new MakerSquirrel({
-      iconUrl: "https://raw.githubusercontent.com/buraito-kun/TJ-supply-gateway/refs/heads/master/public/favicon.ico?token=GHSAT0AAAAAACHK3B4OCGN5VLIOEGPMJWZQZZ56ZRA",
+      iconUrl: "http://localhost:3021/public/favicon.ico",
       setupIcon: "./public/favicon.ico"
     }), 
     new MakerZIP({}, ['darwin']), 
@@ -38,6 +38,7 @@ const config: ForgeConfig = {
     new AutoUnpackNativesPlugin({}),
     new WebpackPlugin({
       mainConfig,
+      devContentSecurityPolicy: "default-src 'self' 'unsafe-inline' data:; connect-src 'self' http://localhost:3021 ws://localhost:* data:; script-src 'self' 'unsafe-eval' 'unsafe-inline' data:; img-src 'self' data: blob:;",
       renderer: {
         config: rendererConfig,
         entryPoints: [

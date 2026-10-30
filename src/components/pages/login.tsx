@@ -22,12 +22,14 @@ export default function Login() {
   useEffect(() => {
     if (ironsImageRef.current && logoImageRef.current) {
       const loadImage = async () => {
-        const irons = await window.electronAPI.loadImg("irons.png");
-        const logo = await window.electronAPI.loadImg("logo.png");
         try {
-          ironsImageRef.current.src = irons;
-          logoImageRef.current.src = logo;
-        } catch {}
+          const irons = await window.electronAPI?.loadImg("irons.png");
+          const logo = await window.electronAPI?.loadImg("logo.png");
+          if (irons && ironsImageRef.current) ironsImageRef.current.src = irons;
+          if (logo && logoImageRef.current) logoImageRef.current.src = logo;
+        } catch (err) {
+          console.warn("Failed to load images:", err);
+        }
       };
       loadImage();
     }
